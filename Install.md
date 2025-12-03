@@ -20,3 +20,15 @@ sudo systemctl status jenkins
 
 ````
 
+
+
+pipeline {
+    agent any
+    stages {
+        stage('raja') {
+            steps {
+                sh 'touch raja'
+            }
+        }
+    }
+}
