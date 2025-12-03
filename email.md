@@ -48,4 +48,56 @@ pipeline {
 
 <img width="1912" height="463" alt="image" src="https://github.com/user-attachments/assets/d2839c32-23b4-4683-970b-32e53ac41951" />
 
+```
+
+pipeline {
+    agent any
+    
+    stages {
+        stage('hello') {
+            steps {
+                echo 'hello world'
+            }
+        }
+
+        stage('hello1') {
+            steps {
+                sh 'mkdir raja'
+            }
+        }
+
+        stage('hello2') {
+            steps {
+                sh 'mkdir raja'
+            }
+        }
+    }
+
+    post {
+        always {
+            script {
+                def buildStatus = currentBuild.currentResult
+                def buildUser = currentBuild.getBuildCauses('hudson.model.Cause$UserIdCause')[0]?.userId ?: 'Git User'
+                
+                emailext(
+                    subject: "Pipeline ${buildStatus}: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                    body: """
+                        <p>This is a Jenkins CI/CD pipeline status.</p>
+                        <p><b>Project:</b> ${env.JOB_NAME}</p>
+                        <p><b>Build Number:</b> ${env.BUILD_NUMBER}</p>
+                        <p><b>Build Status:</b> ${buildStatus}</p>
+                        <p><b>Started by:</b> ${buildUser}</p>
+                        <p><b>Build URL:</b> <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>
+                    """,
+                    to: 'rajesh45v@gmail.com, rajeshv0450@gmail.com',
+                    from: 'rajesh45v@gmail.com',
+                    replyTo: 'rajesh45v@gmail.com',
+                    mimeType: 'text/html'
+                )
+            }
+        }
+    }
+}
+```
+
 
