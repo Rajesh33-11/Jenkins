@@ -12,14 +12,8 @@ apt update -y && apt upgrade -y
    12  sh startup.sh
    13  cd ..
    14  ls
-   15  pwd
-   16  cd home
-   17  ls
-   18  cd ..
-   19  cd usr
-   20  cd
-   21  cd home
-   22  ls
+   15 
+
    23  cd apache-tomcat-9.0.111/
    24  ls
    25  /bin
